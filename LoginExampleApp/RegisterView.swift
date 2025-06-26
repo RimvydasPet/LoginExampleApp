@@ -52,7 +52,11 @@ struct RegisterView: View {
             return
         }
         // Check if user exists
-        let fetchDescriptor = FetchDescriptor<User>(predicate: #Predicate { $0.username == username })
+        let usernameToCheck = username
+        let predicate = #Predicate<User> { user in
+            user.username == usernameToCheck
+        }
+        let fetchDescriptor = FetchDescriptor<User>(predicate: predicate)
         let existingUsers = (try? modelContext.fetch(fetchDescriptor)) ?? []
         guard existingUsers.isEmpty else {
             errorMessage = "User already exists."

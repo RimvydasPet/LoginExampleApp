@@ -15,10 +15,17 @@ final class LoginInteractor: LoginBusinessLogic {
             presenter?.presentLogin(response: Login.Response(success: false, errorMessage: "Internal error"))
             return
         }
-        let fetchDescriptor = FetchDescriptor<User>(predicate: #Predicate { user in
-            user.username == request.username
-        })
+        
+        // Store the username from the request in a local constant
+        let usernameToFind = request.username
+        
+        let predicate = #Predicate<User> { user in
+            user.username == usernameToFind
+        }
+        
+        let fetchDescriptor = FetchDescriptor<User>(predicate: predicate)
         let users = (try? modelContext.fetch(fetchDescriptor)) ?? []
+        
         if let user = users.first, user.password == request.password {
             presenter?.presentLogin(response: Login.Response(success: true, errorMessage: nil))
         } else {
