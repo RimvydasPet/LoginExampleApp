@@ -6,9 +6,13 @@ protocol LoginPresentationLogic {
 
 final class LoginPresenter: LoginPresentationLogic {
     weak var viewController: LoginDisplayLogic?
-    
+    // For SwiftUI
+    var onPresentLogin: ((Login.Response) -> Void)?
+
     func presentLogin(response: Login.Response) {
         let viewModel = Login.ViewModel(success: response.success, errorMessage: response.errorMessage)
         viewController?.displayLogin(viewModel: viewModel)
+        // Notify SwiftUI if closure is set
+        onPresentLogin?(response)
     }
 }
