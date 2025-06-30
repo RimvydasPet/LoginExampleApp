@@ -6,7 +6,6 @@ protocol LoginPresentationLogic {
 
 final class LoginPresenter: LoginPresentationLogic {
     weak var viewController: LoginDisplayLogic?
-    // For SwiftUI
     var onPresentLogin: ((Login.Response) -> Void)?
 
     func presentLogin(response: Login.Response) {

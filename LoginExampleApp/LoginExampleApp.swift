@@ -1,5 +1,5 @@
 //
-//  LoginExampleAppApp.swift
+//  LoginExampleApp.swift
 //  LoginExampleApp
 //
 //  Created by Rimvydas on 2025-06-26.
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct LoginExampleAppApp: App {
+struct LoginExampleApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             User.self,

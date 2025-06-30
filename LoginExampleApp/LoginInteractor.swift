@@ -8,7 +8,7 @@ import SwiftData
 
 final class LoginInteractor: LoginBusinessLogic {
     var presenter: LoginPresentationLogic?
-    var modelContext: ModelContext? // Injected from ViewModel
+    var modelContext: ModelContext?
 
     func login(request: Login.Request) {
         guard let modelContext else {
@@ -16,9 +16,7 @@ final class LoginInteractor: LoginBusinessLogic {
             return
         }
         
-        // Store the username from the request in a local constant
         let usernameToFind = request.username
-        
         let predicate = #Predicate<User> { user in
             user.username == usernameToFind
         }

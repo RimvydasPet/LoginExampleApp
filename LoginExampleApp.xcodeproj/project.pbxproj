@@ -12,7 +12,6 @@
 		BD422DCF2E0DB98C0094E522 /* LoginExampleAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD422DCE2E0DB98C0094E522 /* LoginExampleAppUITestsLaunchTests.swift */; };
 		BD4BA12D2E0DBD2300DDCADA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA1202E0DBD2300DDCADA /* LoginViewModel.swift */; };
 		BD4BA12E2E0DBD2300DDCADA /* LoginExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA1212E0DBD2300DDCADA /* LoginExampleApp.swift */; };
-		BD4BA12F2E0DBD2300DDCADA /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA1222E0DBD2300DDCADA /* Item.swift */; };
 		BD4BA1302E0DBD2300DDCADA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA1232E0DBD2300DDCADA /* LoginView.swift */; };
 		BD4BA1312E0DBD2300DDCADA /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA1242E0DBD2300DDCADA /* LoginInteractor.swift */; };
 		BD4BA1322E0DBD2300DDCADA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD4BA1252E0DBD2300DDCADA /* Assets.xcassets */; };
@@ -51,7 +50,6 @@
 		BD422DCE2E0DB98C0094E522 /* LoginExampleAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExampleAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BD4BA1202E0DBD2300DDCADA /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BD4BA1212E0DBD2300DDCADA /* LoginExampleApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginExampleApp.swift; sourceTree = "<group>"; };
-		BD4BA1222E0DBD2300DDCADA /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BD4BA1232E0DBD2300DDCADA /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BD4BA1242E0DBD2300DDCADA /* LoginInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		BD4BA1252E0DBD2300DDCADA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 		BD4BA11F2E0DBD2300DDCADA /* LoginExampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				BD4BA1222E0DBD2300DDCADA /* Item.swift */,
 				BD4BA1212E0DBD2300DDCADA /* LoginExampleApp.swift */,
 				BD4BA1242E0DBD2300DDCADA /* LoginInteractor.swift */,
 				BD4BA1282E0DBD2300DDCADA /* LoginModels.swift */,
@@ -288,7 +285,6 @@
 				BD4BA13A2E0DCAB300DDCADA /* RegisterView.swift in Sources */,
 				BD4BA1302E0DBD2300DDCADA /* LoginView.swift in Sources */,
 				BD4BA1372E0DBD2300DDCADA /* LoginPresenter.swift in Sources */,
-				BD4BA12F2E0DBD2300DDCADA /* Item.swift in Sources */,
 				BD4BA12E2E0DBD2300DDCADA /* LoginExampleApp.swift in Sources */,
 				BD4BA1342E0DBD2300DDCADA /* LoginModels.swift in Sources */,
 				BD4BA1382E0DBD2300DDCADA /* LoginRouter.swift in Sources */,

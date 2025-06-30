@@ -16,13 +16,16 @@ struct LoginView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .autocapitalization(.none)
                 .padding(.horizontal)
+                .accessibilityIdentifier("usernameField")
             SecureField("Password", text: $viewModel.password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
+                .accessibilityIdentifier("passwordField")
             if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
                     .foregroundColor(.red)
                     .multilineTextAlignment(.center)
+                    .accessibilityIdentifier("errorLabel")
             }
             Button("Login") {
                 viewModel.login()
@@ -31,11 +34,13 @@ struct LoginView: View {
             .background(Color.accentColor)
             .foregroundColor(.white)
             .cornerRadius(8)
+            .accessibilityIdentifier("loginButton")
 
             Button("Register") {
                 showRegister = true
             }
             .padding(.top, 8)
+            .accessibilityIdentifier("registerButton")
         }
         .padding()
         .onAppear {
@@ -65,6 +70,7 @@ struct HomeView: View {
         VStack(spacing: 20) {
             Text("Welcome!")
                 .font(.largeTitle)
+                .accessibilityIdentifier("welcomeText")
             
             Text("You are successfully logged in.")
                 .font(.headline)
@@ -82,6 +88,7 @@ struct HomeView: View {
                     .padding()
                     .background(Color.red)
                     .cornerRadius(10)
+                    .accessibilityIdentifier("logoutButton")
             }
             .padding(.horizontal)
         }
