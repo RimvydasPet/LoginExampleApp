@@ -40,7 +40,6 @@ final class LoginViewController: UIViewController, LoginDisplayLogic {
         errorLabel.textColor = .red
         errorLabel.numberOfLines = 0
         errorLabel.textAlignment = .center
-        
         usernameField.borderStyle = .roundedRect
         passwordField.borderStyle = .roundedRect
         

@@ -40,10 +40,8 @@ final class LoginExampleAppUITests: XCTestCase {
     private func login(username: String, password: String) {
         usernameField.tap()
         usernameField.typeText(username)
-        
         passwordField.tap()
         passwordField.typeText(password)
-        
         loginButton.tap()
     }
     
