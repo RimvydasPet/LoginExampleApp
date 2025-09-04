@@ -47,21 +47,24 @@ struct RegisterView: View {
             errorMessage = "Username and password are required."
             return
         }
+        
         guard password == confirmPassword else {
             errorMessage = "Passwords do not match."
             return
         }
-        // Check if user exists
+        
         let usernameToCheck = username
         let predicate = #Predicate<User> { user in
             user.username == usernameToCheck
         }
+        
         let fetchDescriptor = FetchDescriptor<User>(predicate: predicate)
         let existingUsers = (try? modelContext.fetch(fetchDescriptor)) ?? []
         guard existingUsers.isEmpty else {
             errorMessage = "User already exists."
             return
         }
+        
         let user = User(username: username, password: password)
         modelContext.insert(user)
         try? modelContext.save()

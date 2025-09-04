@@ -10,7 +10,7 @@ class LoginViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
 
     private var interactor: LoginBusinessLogic
-
+    
     var modelContext: ModelContext? {
         didSet {
             if let interactor = interactor as? LoginInteractor {

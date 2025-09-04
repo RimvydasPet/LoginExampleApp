@@ -68,7 +68,6 @@ final class LoginViewController: UIViewController, LoginDisplayLogic {
     func displayLogin(viewModel: Login.ViewModel) {
         if viewModel.success {
             errorLabel.text = nil
-            // Route to home
             router?.routeToHome()
         } else {
             errorLabel.text = viewModel.errorMessage

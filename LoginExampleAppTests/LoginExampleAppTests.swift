@@ -10,7 +10,6 @@ import SwiftData
 @testable import LoginExampleApp
 
 // MARK: - Mock Classes
-
 class MockLoginPresenter: LoginPresentationLogic {
     var presentLoginCalled = false
     var receivedResponse: Login.Response?
@@ -22,11 +21,9 @@ class MockLoginPresenter: LoginPresentationLogic {
 }
 
 // MARK: - Test Classes
-
 final class LoginExampleAppTests: XCTestCase {
     
     // MARK: - Properties
-    
     var viewModel: LoginViewModel!
     var interactor: LoginInteractor!
     var mockPresenter: MockLoginPresenter!
@@ -34,10 +31,7 @@ final class LoginExampleAppTests: XCTestCase {
     var container: ModelContainer!
     
     // MARK: - Setup & Teardown
-    
     override func setUpWithError() throws {
-        try super.setUp()
-        
         // Set up in-memory storage for testing
         let schema = Schema([
             User.self,
@@ -63,11 +57,9 @@ final class LoginExampleAppTests: XCTestCase {
         mockPresenter = nil
         modelContext = nil
         container = nil
-        try super.tearDown()
     }
 
     // MARK: - Helper Methods
-    
     private func createTestUser(username: String, password: String) -> User {
         let user = User(username: username, password: password)
         modelContext.insert(user)
@@ -76,7 +68,6 @@ final class LoginExampleAppTests: XCTestCase {
     }
     
     // MARK: - LoginViewModel Tests
-    
     func testLoginViewModel_InitialState() {
         XCTAssertEqual(viewModel.username, "")
         XCTAssertEqual(viewModel.password, "")

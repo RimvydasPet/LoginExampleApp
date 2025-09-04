@@ -96,7 +96,6 @@ struct HomeView: View {
         .alert("Log Out", isPresented: $showingLogoutAlert) {
             Button("Cancel", role: .cancel) {}
             Button("Log Out", role: .destructive) {
-                // Dismiss the home view and return to login
                 dismiss()
             }
         } message: {

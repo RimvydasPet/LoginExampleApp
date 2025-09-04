@@ -12,7 +12,6 @@ final class LoginExampleAppUITestsLaunchTests: XCTestCase {
     private var app: XCUIApplication!
     
     // MARK: - Setup & Configuration
-    
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         // Set to true to run tests for each UI configuration (light/dark mode, different languages, etc.)
         false
@@ -31,7 +30,6 @@ final class LoginExampleAppUITestsLaunchTests: XCTestCase {
     }
     
     // MARK: - Launch Tests
-    
     func testLaunchPerformance() {
         // Configure the test to be more lenient with performance variations
         let options = XCTMeasureOptions()
@@ -95,11 +93,11 @@ final class LoginExampleAppUITestsLaunchTests: XCTestCase {
         XCTAssertTrue(app.staticTexts["Login"].exists, "Login screen should be visible")
         
         // Get the current interface style
-//        let isDarkMode = app.windows.element(boundBy: 0).traitCollection.userInterfaceStyle == .dark
+        //let isDarkMode = app.windows.element(boundBy: 0).traitCollection.userInterfaceStyle == .dark
         
         // Capture screenshot for this configuration
         let attachment = XCTAttachment(screenshot: app.screenshot())
-//        attachment.name = "Launch in configuration: \(isDarkMode ? "Dark" : "Light") Mode"
+        //attachment.name = "Launch in configuration: \(isDarkMode ? "Dark" : "Light") Mode"
         attachment.lifetime = .keepAlways
         add(attachment)
     }
