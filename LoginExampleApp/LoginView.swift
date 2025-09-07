@@ -6,136 +6,148 @@ struct LoginView: View {
     @Environment(\.modelContext) private var modelContext
     @StateObject private var viewModel = LoginViewModel()
     @State private var showRegister = false
+    
+    private let gradient = LinearGradient(
+        gradient: Gradient(colors: [.blue, .purple]),
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
 
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Login")
-                .font(.largeTitle)
-                .padding(.top, 32)
-            TextField("Username", text: $viewModel.username)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-                .padding(.horizontal)
-                .accessibilityIdentifier("usernameField")
-            SecureField("Password", text: $viewModel.password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.horizontal)
-                .accessibilityIdentifier("passwordField")
-            if let errorMessage = viewModel.errorMessage {
-                Text(errorMessage)
-                    .foregroundColor(.red)
+        ZStack {
+            // Background gradient
+            gradient
+                .opacity(0.2)
+                .ignoresSafeArea()
+            
+            VStack(spacing: 32) {
+                // Header
+                VStack(spacing: 12) {
+                    Image(systemName: "dollarsign.circle.fill")
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .foregroundColor(.blue)
+                    
+                    Text("Welcome Back!")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    
+                    Text("Sign in to access your account")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+                .padding(.top, 40)
+                
+                // Form
+                VStack(spacing: 20) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Username")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        TextField("Enter your username", text: $viewModel.username)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(.none)
+                            .accessibilityIdentifier("usernameField")
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Password")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        SecureField("Enter your password", text: $viewModel.password)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .accessibilityIdentifier("passwordField")
+                    }
+                    
+                    if let errorMessage = viewModel.errorMessage {
+                        Text(errorMessage)
+                            .font(.caption)
+                            .foregroundColor(.red)
+                            .multilineTextAlignment(.center)
+                            .accessibilityIdentifier("errorLabel")
+                    }
+                    
+                    Button(action: {
+                        viewModel.login()
+                    }) {
+                        Text("Sign In")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                            .shadow(radius: 3)
+                    }
+                    .padding(.top, 10)
+                    .accessibilityIdentifier("loginButton")
+                    
+                    HStack {
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(.gray.opacity(0.3))
+                        Text("OR")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(.gray.opacity(0.3))
+                    }
+                    .padding(.vertical)
+                    
+                    Button(action: {
+                        showRegister = true
+                    }) {
+                        Text("Create Account")
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.blue, lineWidth: 1)
+                            )
+                    }
+                    .accessibilityIdentifier("registerButton")
+                }
+                .padding(.horizontal, 32)
+                .padding(.bottom, 40)
+                
+                Spacer()
+                
+                Text("By continuing, you agree to our Terms of Service and Privacy Policy")
+                    .font(.caption2)
+                    .foregroundColor(.gray)
                     .multilineTextAlignment(.center)
-                    .accessibilityIdentifier("errorLabel")
+                    .padding(.bottom, 20)
             }
-            Button("Login") {
-                viewModel.login()
-            }
-            .padding()
-            .background(Color.accentColor)
-            .foregroundColor(.white)
-            .cornerRadius(8)
-            .accessibilityIdentifier("loginButton")
-
-            Button("Register") {
-                showRegister = true
-            }
-            .padding(.top, 8)
-            .accessibilityIdentifier("registerButton")
         }
-        .padding()
         .onAppear {
             viewModel.modelContext = modelContext
         }
         .fullScreenCover(isPresented: $viewModel.isLoggedIn, onDismiss: {
-            // Reset the login state when HomeView is dismissed (after logout)
+            // Reset the login state when CurrencyConverter is dismissed (after logout)
             viewModel.isLoggedIn = false
             viewModel.username = ""
             viewModel.password = ""
             viewModel.errorMessage = nil
         }) {
-            HomeView()
+            NavigationView {
+                CurrencyConverterView()
+                    .navigationTitle("Currency Converter")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Logout") {
+                                viewModel.isLoggedIn = false
+                            }
+                        }
+                    }
+            }
         }
         .sheet(isPresented: $showRegister) {
             RegisterView()
-        }
-    }
-}
-
-struct HomeView: View {
-    @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var modelContext
-    @State private var showingLogoutAlert = false
-    @State private var showingCurrencyConverter = false
-    
-    var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                Text("Welcome!")
-                    .font(.largeTitle)
-                    .accessibilityIdentifier("welcomeText")
-                
-                Text("You are successfully logged in.")
-                    .font(.headline)
-                    .foregroundColor(.secondary)
-                
-                Spacer()
-                
-                // Currency Converter Button
-                Button(action: {
-                    showingCurrencyConverter = true
-                }) {
-                    HStack {
-                        Image(systemName: "dollarsign.circle.fill")
-                            .font(.title2)
-                        Text("Currency Converter")
-                            .font(.headline)
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
-                }
-                .padding(.horizontal)
-                .sheet(isPresented: $showingCurrencyConverter) {
-                    NavigationView {
-                        CurrencyConverterView()
-                            .navigationTitle("Currency Converter")
-                            .navigationBarTitleDisplayMode(.inline)
-                            .toolbar {
-                                ToolbarItem(placement: .navigationBarTrailing) {
-                                    Button("Done") {
-                                        showingCurrencyConverter = false
-                                    }
-                                }
-                            }
-                    }
-                }
-                
-                // Logout Button
-                Button(action: {
-                    showingLogoutAlert = true
-                }) {
-                    Text("Log Out")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.red)
-                        .cornerRadius(10)
-                        .accessibilityIdentifier("logoutButton")
-                }
-                .padding(.horizontal)
-            }
-            .padding()
-        }
-        .alert("Log Out", isPresented: $showingLogoutAlert) {
-            Button("Cancel", role: .cancel) {}
-            Button("Log Out", role: .destructive) {
-                dismiss()
-            }
-        } message: {
-            Text("Are you sure you want to log out?")
         }
     }
 }
