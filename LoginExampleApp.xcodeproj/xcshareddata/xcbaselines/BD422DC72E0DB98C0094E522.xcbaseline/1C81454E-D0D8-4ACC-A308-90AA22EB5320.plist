@@ -4,6 +4,33 @@
 <dict>
 	<key>classNames</key>
 	<dict>
+		<key>LoginExampleAppUITests</key>
+		<dict>
+			<key>testPerformanceLogin()</key>
+			<dict>
+				<key>com.apple.dt.XCTMetric_CPU.time</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>1.190000</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Local Baseline</string>
+				</dict>
+				<key>com.apple.dt.XCTMetric_Memory.physical</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>188.000000</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Local Baseline</string>
+				</dict>
+				<key>com.apple.dt.XCTMetric_Memory.physical_peak</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>16700.000000</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Local Baseline</string>
+				</dict>
+			</dict>
+		</dict>
 		<key>LoginExampleAppUITestsLaunchTests</key>
 		<dict>
 			<key>testAppMemoryUsageOnLaunch()</key>
@@ -11,7 +38,7 @@
 				<key>com.apple.dt.XCTMetric_Memory.physical</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>6.830000</real>
+					<real>61.400000</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>
@@ -23,12 +50,22 @@
 					<string>Local Baseline</string>
 				</dict>
 			</dict>
+			<key>testInitialLaunchState()</key>
+			<dict>
+				<key>com.apple.dt.XCTMetric_ApplicationLaunch-AppLaunch.duration</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>3.920000</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Local Baseline</string>
+				</dict>
+			</dict>
 			<key>testLaunchPerformance()</key>
 			<dict>
 				<key>com.apple.dt.XCTMetric_ApplicationLaunch-AppLaunch.duration</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>2.510000</real>
+					<real>3.280000</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>

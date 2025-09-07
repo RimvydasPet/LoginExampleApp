@@ -1,6 +1,6 @@
 import SwiftUI
-
 import SwiftData
+import CurrencyConverter
 
 struct LoginView: View {
     @Environment(\.modelContext) private var modelContext
@@ -65,34 +65,70 @@ struct HomeView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @State private var showingLogoutAlert = false
+    @State private var showingCurrencyConverter = false
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Welcome!")
-                .font(.largeTitle)
-                .accessibilityIdentifier("welcomeText")
-            
-            Text("You are successfully logged in.")
-                .font(.headline)
-                .foregroundColor(.secondary)
-            
-            Spacer()
-            
-            Button(action: {
-                showingLogoutAlert = true
-            }) {
-                Text("Log Out")
+        NavigationView {
+            VStack(spacing: 20) {
+                Text("Welcome!")
+                    .font(.largeTitle)
+                    .accessibilityIdentifier("welcomeText")
+                
+                Text("You are successfully logged in.")
                     .font(.headline)
+                    .foregroundColor(.secondary)
+                
+                Spacer()
+                
+                // Currency Converter Button
+                Button(action: {
+                    showingCurrencyConverter = true
+                }) {
+                    HStack {
+                        Image(systemName: "dollarsign.circle.fill")
+                            .font(.title2)
+                        Text("Currency Converter")
+                            .font(.headline)
+                    }
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.red)
+                    .background(Color.blue)
                     .cornerRadius(10)
-                    .accessibilityIdentifier("logoutButton")
+                }
+                .padding(.horizontal)
+                .sheet(isPresented: $showingCurrencyConverter) {
+                    NavigationView {
+                        CurrencyConverterView()
+                            .navigationTitle("Currency Converter")
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbar {
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    Button("Done") {
+                                        showingCurrencyConverter = false
+                                    }
+                                }
+                            }
+                    }
+                }
+                
+                // Logout Button
+                Button(action: {
+                    showingLogoutAlert = true
+                }) {
+                    Text("Log Out")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.red)
+                        .cornerRadius(10)
+                        .accessibilityIdentifier("logoutButton")
+                }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
+            .padding()
         }
-        .padding()
         .alert("Log Out", isPresented: $showingLogoutAlert) {
             Button("Cancel", role: .cancel) {}
             Button("Log Out", role: .destructive) {

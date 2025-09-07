@@ -67,7 +67,7 @@ final class LoginExampleAppUITests: XCTestCase {
         // Wait for the home screen to appear
         let welcomeTextPredicate = NSPredicate(format: "label CONTAINS 'Welcome'")
         let welcomeTextElement = app.staticTexts.element(matching: welcomeTextPredicate)
-        XCTAssertTrue(welcomeTextElement.waitForExistence(timeout: 5), "Welcome text should be visible after successful login")
+        XCTAssertTrue(welcomeTextElement.waitForExistence(timeout: 1), "Welcome text should be visible after successful login")
     }
     
     func testFailedLogin_InvalidCredentials() {
