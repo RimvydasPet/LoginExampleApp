@@ -7,12 +7,6 @@ struct CurrencyConverterView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            // Header
-            Text("Currency Converter")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding(.top)
-            
             // From Currency Section
             VStack(alignment: .leading, spacing: 8) {
                 Text("You send")
@@ -24,10 +18,7 @@ struct CurrencyConverterView: View {
                     TextField("0.00", text: $viewModel.fromAmount)
                         .keyboardType(.decimalPad)
                         .font(.largeTitle)
-                        .onChange(of: viewModel.fromAmount) { _ in
-                            viewModel.convert()
-                        }
-                    
+                
                     // Currency Selection Button
                     Button(action: {
                         showFromCurrencyPicker = true
@@ -178,9 +169,4 @@ struct CurrencyConverterView: View {
     }
 }
 
-// MARK: - Preview
-struct CurrencyConverterView_Previews: PreviewProvider {
-    static var previews: some View {
-        CurrencyConverterView()
-    }
-}
+

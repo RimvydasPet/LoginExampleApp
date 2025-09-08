@@ -56,7 +56,7 @@ struct CurrencySelectionView: View {
                 }
                 .listStyle(PlainListStyle())
             }
-            .navigationTitle("Select Currency")
+            .navigationTitle("Sending to")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -96,15 +96,5 @@ struct SearchBar: View {
             .background(Color(.systemGray6))
             .cornerRadius(8)
         }
-    }
-}
-
-// MARK: - Preview
-struct CurrencySelectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        CurrencySelectionView(
-            selectedCurrency: .constant(Currency.defaultFromCurrency),
-            excludedCurrency: Currency.defaultToCurrency
-        )
     }
 }

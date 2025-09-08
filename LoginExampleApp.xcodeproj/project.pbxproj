@@ -22,6 +22,11 @@
 		BD4BA1382E0DBD2300DDCADA /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA12C2E0DBD2300DDCADA /* LoginRouter.swift */; };
 		BD4BA13A2E0DCAB300DDCADA /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA1392E0DCAB300DDCADA /* RegisterView.swift */; };
 		BD4BA13C2E0DCAC400DDCADA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA13B2E0DCAC400DDCADA /* User.swift */; };
+		BDFDF71C2E6F629D0096C990 /* CurrencyConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFDF7122E6F629D0096C990 /* CurrencyConverterViewModel.swift */; };
+		BDFDF71D2E6F629D0096C990 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFDF7142E6F629D0096C990 /* Currency.swift */; };
+		BDFDF71E2E6F629D0096C990 /* CurrencySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFDF7182E6F629D0096C990 /* CurrencySelectionView.swift */; };
+		BDFDF71F2E6F629D0096C990 /* CurrencyConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFDF7192E6F629D0096C990 /* CurrencyConverterView.swift */; };
+		BDFDF7202E6F629D0096C990 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFDF71B2E6F629D0096C990 /* APIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +65,13 @@
 		BD4BA12C2E0DBD2300DDCADA /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		BD4BA1392E0DCAB300DDCADA /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		BD4BA13B2E0DCAC400DDCADA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BDFDF7122E6F629D0096C990 /* CurrencyConverterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyConverterViewModel.swift; sourceTree = "<group>"; };
+		BDFDF7142E6F629D0096C990 /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		BDFDF7152E6F629D0096C990 /* CurrencyConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyConverter.h; sourceTree = "<group>"; };
+		BDFDF7162E6F629D0096C990 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		BDFDF7182E6F629D0096C990 /* CurrencySelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectionView.swift; sourceTree = "<group>"; };
+		BDFDF7192E6F629D0096C990 /* CurrencyConverterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyConverterView.swift; sourceTree = "<group>"; };
+		BDFDF71B2E6F629D0096C990 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +139,7 @@
 		BD4BA11F2E0DBD2300DDCADA /* LoginExampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				BDFDF7102E6F629D0096C990 /* CurrencyConverter */,
 				BD4BA1212E0DBD2300DDCADA /* LoginExampleApp.swift */,
 				BD4BA1242E0DBD2300DDCADA /* LoginInteractor.swift */,
 				BD4BA1282E0DBD2300DDCADA /* LoginModels.swift */,
@@ -149,6 +162,52 @@
 				BD4BA1272E0DBD2300DDCADA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BDFDF7102E6F629D0096C990 /* CurrencyConverter */ = {
+			isa = PBXGroup;
+			children = (
+				BDFDF7112E6F629D0096C990 /* ViewModels */,
+				BDFDF7132E6F629D0096C990 /* Models */,
+				BDFDF7152E6F629D0096C990 /* CurrencyConverter.h */,
+				BDFDF7162E6F629D0096C990 /* module.modulemap */,
+				BDFDF7172E6F629D0096C990 /* Views */,
+				BDFDF71A2E6F629D0096C990 /* Services */,
+			);
+			path = CurrencyConverter;
+			sourceTree = "<group>";
+		};
+		BDFDF7112E6F629D0096C990 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BDFDF7122E6F629D0096C990 /* CurrencyConverterViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BDFDF7132E6F629D0096C990 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BDFDF7142E6F629D0096C990 /* Currency.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BDFDF7172E6F629D0096C990 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BDFDF7182E6F629D0096C990 /* CurrencySelectionView.swift */,
+				BDFDF7192E6F629D0096C990 /* CurrencyConverterView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BDFDF71A2E6F629D0096C990 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BDFDF71B2E6F629D0096C990 /* APIService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,16 +340,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDFDF71D2E6F629D0096C990 /* Currency.swift in Sources */,
+				BDFDF7202E6F629D0096C990 /* APIService.swift in Sources */,
 				BD4BA1352E0DBD2300DDCADA /* LoginViewController.swift in Sources */,
 				BD4BA13A2E0DCAB300DDCADA /* RegisterView.swift in Sources */,
 				BD4BA1302E0DBD2300DDCADA /* LoginView.swift in Sources */,
+				BDFDF71E2E6F629D0096C990 /* CurrencySelectionView.swift in Sources */,
 				BD4BA1372E0DBD2300DDCADA /* LoginPresenter.swift in Sources */,
 				BD4BA12E2E0DBD2300DDCADA /* LoginExampleApp.swift in Sources */,
 				BD4BA1342E0DBD2300DDCADA /* LoginModels.swift in Sources */,
+				BDFDF71F2E6F629D0096C990 /* CurrencyConverterView.swift in Sources */,
 				BD4BA1382E0DBD2300DDCADA /* LoginRouter.swift in Sources */,
 				BD4BA1312E0DBD2300DDCADA /* LoginInteractor.swift in Sources */,
 				BD4BA12D2E0DBD2300DDCADA /* LoginViewModel.swift in Sources */,
 				BD4BA13C2E0DCAC400DDCADA /* User.swift in Sources */,
+				BDFDF71C2E6F629D0096C990 /* CurrencyConverterViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

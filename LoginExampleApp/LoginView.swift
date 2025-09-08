@@ -1,6 +1,6 @@
 import SwiftUI
 import SwiftData
-import CurrencyConverter
+//import CurrencyConverter
 
 struct LoginView: View {
     @Environment(\.modelContext) private var modelContext
@@ -23,11 +23,6 @@ struct LoginView: View {
             VStack(spacing: 32) {
                 // Header
                 VStack(spacing: 12) {
-                    Image(systemName: "dollarsign.circle.fill")
-                        .resizable()
-                        .frame(width: 80, height: 80)
-                        .foregroundColor(.blue)
-                    
                     Text("Welcome Back!")
                         .font(.largeTitle)
                         .fontWeight(.bold)
@@ -127,7 +122,6 @@ struct LoginView: View {
             viewModel.modelContext = modelContext
         }
         .fullScreenCover(isPresented: $viewModel.isLoggedIn, onDismiss: {
-            // Reset the login state when CurrencyConverter is dismissed (after logout)
             viewModel.isLoggedIn = false
             viewModel.username = ""
             viewModel.password = ""
@@ -135,7 +129,6 @@ struct LoginView: View {
         }) {
             NavigationView {
                 CurrencyConverterView()
-                    .navigationTitle("Currency Converter")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
