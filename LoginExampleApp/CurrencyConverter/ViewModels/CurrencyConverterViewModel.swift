@@ -19,8 +19,7 @@ class CurrencyConverterViewModel: ObservableObject {
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
         formatter.minimumFractionDigits = 2
-        formatter.usesGroupingSeparator = true
-        formatter.groupingSeparator = ","
+        formatter.usesGroupingSeparator = false
         formatter.decimalSeparator = "."
         return formatter
     }()
@@ -31,10 +30,20 @@ class CurrencyConverterViewModel: ObservableObject {
         self.fromCurrency = Currency.defaultFromCurrency
         self.toCurrency = Currency.defaultToCurrency
         
+        // Setup amount change publisher with debounce
+        $fromAmount
+            .dropFirst() // Skip initial value
+            .debounce(for: .milliseconds(500), scheduler: RunLoop.main) // Wait for typing to stop
+            .removeDuplicates() // Only proceed if value changed
+            .sink { [weak self] _ in
+                self?.convert()
+            }
+            .store(in: &cancellables)
+        
         // Initial conversion
         convert()
         
-        // Observe changes to trigger conversion
+        // Observe currency changes to trigger conversion
         $fromCurrency
             .dropFirst()
             .sink { [weak self] _ in
@@ -52,7 +61,7 @@ class CurrencyConverterViewModel: ObservableObject {
     
     // MARK: - Public Methods
     func convert() {
-        guard let amount = Double(fromAmount) else {
+        guard let amount = Float(fromAmount) else {
             errorMessage = "Please enter a valid amount"
             return
         }
@@ -110,7 +119,7 @@ class CurrencyConverterViewModel: ObservableObject {
         case .invalidResponse:
             errorMessage = "Invalid response from server"
         case .requestFailed(let error):
-            errorMessage = "Request failed: \(error.localizedDescription)"
+            errorMessage = "No network  \nCheck your internet connection"
         case .invalidData:
             errorMessage = "Invalid data received"
         case .decodingError:

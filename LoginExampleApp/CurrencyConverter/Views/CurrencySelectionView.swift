@@ -21,11 +21,8 @@ struct CurrencySelectionView: View {
     var body: some View {
         NavigationView {
             VStack {
-                // Search Bar
                 SearchBar(text: $searchText, placeholder: "Search currencies...")
                     .padding()
-                
-                // Currency List
                 List(filteredCurrencies) { currency in
                     Button(action: {
                         selectedCurrency = currency

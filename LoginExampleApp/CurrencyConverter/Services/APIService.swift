@@ -10,7 +10,7 @@ enum APIError: Error {
 }
 
 protocol APIServiceProtocol {
-    func fetchExchangeRate(from: String, to: String, amount: Double) -> AnyPublisher<ExchangeRateResponse, APIError>
+    func fetchExchangeRate(from: String, to: String, amount: Float) -> AnyPublisher<ExchangeRateResponse, APIError>
 }
 
 class APIService: APIServiceProtocol {
@@ -19,7 +19,7 @@ class APIService: APIServiceProtocol {
     
     private init() {}
     
-    func fetchExchangeRate(from: String, to: String, amount: Double) -> AnyPublisher<ExchangeRateResponse, APIError> {
+    func fetchExchangeRate(from: String, to: String, amount: Float) -> AnyPublisher<ExchangeRateResponse, APIError> {
         guard var components = URLComponents(string: baseURL) else {
             return Fail(error: APIError.invalidURL).eraseToAnyPublisher()
         }
@@ -40,14 +40,21 @@ class APIService: APIServiceProtocol {
         return URLSession.shared.dataTaskPublisher(for: request)
             .mapError { APIError.requestFailed($0) }
             .tryMap { data, response -> Data in
+                // Print raw response for debugging
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("API Response: \(jsonString)")
+                }
+                
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {
+                    print("HTTP Error: \(response)")
                     throw APIError.invalidResponse
                 }
                 return data
             }
             .decode(type: ExchangeRateResponse.self, decoder: JSONDecoder())
             .mapError { error -> APIError in
+                print("Decoding error: \(error)")
                 if let apiError = error as? APIError {
                     return apiError
                 } else {
@@ -62,7 +69,7 @@ class APIService: APIServiceProtocol {
 class MockAPIService: APIServiceProtocol {
     var mockResponse: Result<ExchangeRateResponse, APIError> = .failure(.invalidURL)
     
-    func fetchExchangeRate(from: String, to: String, amount: Double) -> AnyPublisher<ExchangeRateResponse, APIError> {
+    func fetchExchangeRate(from: String, to: String, amount: Float) -> AnyPublisher<ExchangeRateResponse, APIError> {
         return mockResponse.publisher
             .eraseToAnyPublisher()
     }

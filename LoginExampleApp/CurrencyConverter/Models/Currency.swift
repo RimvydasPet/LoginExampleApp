@@ -5,7 +5,7 @@ struct Currency: Identifiable, Hashable {
     let code: String
     let name: String
     let flag: String
-    let maxAmount: Double
+    let maxAmount: Float
     
     // Predefined list of supported currencies with their max limits
     static let supportedCurrencies: [Currency] = [
@@ -28,14 +28,13 @@ struct Currency: Identifiable, Hashable {
 struct ExchangeRateResponse: Decodable {
     let from: String
     let to: String
-    let fromAmount: Double
-    let toAmount: Double
+    let fromAmount: Float
+    let toAmount: Float
     let rate: Double
     
     enum CodingKeys: String, CodingKey {
-        case from, to
-        case fromAmount = "from_amount"
-        case toAmount = "to_amount"
-        case rate
+        case from, to, rate
+        case fromAmount = "fromAmount"
+        case toAmount = "toAmount"
     }
 }

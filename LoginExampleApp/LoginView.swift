@@ -15,13 +15,11 @@ struct LoginView: View {
 
     var body: some View {
         ZStack {
-            // Background gradient
             gradient
                 .opacity(0.2)
                 .ignoresSafeArea()
             
             VStack(spacing: 32) {
-                // Header
                 VStack(spacing: 12) {
                     Text("Welcome Back!")
                         .font(.largeTitle)
@@ -33,12 +31,8 @@ struct LoginView: View {
                 }
                 .padding(.top, 40)
                 
-                // Form
                 VStack(spacing: 20) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Username")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
                         TextField("Enter your username", text: $viewModel.username)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .autocapitalization(.none)
@@ -46,9 +40,6 @@ struct LoginView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Password")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
                         SecureField("Enter your password", text: $viewModel.password)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .accessibilityIdentifier("passwordField")
@@ -98,7 +89,6 @@ struct LoginView: View {
                             .foregroundColor(.blue)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.white)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.blue, lineWidth: 1)

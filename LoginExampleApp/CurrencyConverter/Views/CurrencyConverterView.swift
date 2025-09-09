@@ -9,7 +9,7 @@ struct CurrencyConverterView: View {
         VStack(spacing: 20) {
             // From Currency Section
             VStack(alignment: .leading, spacing: 8) {
-                Text("You send")
+                Text("Sending from")
                     .font(.subheadline)
                     .foregroundColor(.gray)
                 
@@ -73,7 +73,7 @@ struct CurrencyConverterView: View {
             
             // To Currency Section
             VStack(alignment: .leading, spacing: 8) {
-                Text("Recipient gets")
+                Text("Receiver gets")
                     .font(.subheadline)
                     .foregroundColor(.gray)
                 
@@ -82,6 +82,8 @@ struct CurrencyConverterView: View {
                     Text(viewModel.toAmount.isEmpty ? "0.00" : viewModel.toAmount)
                         .font(.largeTitle)
                         .foregroundColor(viewModel.toAmount.isEmpty ? .gray : .primary)
+                    
+                    Spacer()
                     
                     // Currency Selection Button
                     Button(action: {
@@ -111,12 +113,6 @@ struct CurrencyConverterView: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                         Spacer()
-                        Text("Live")
-                            .font(.caption2)
-                            .padding(4)
-                            .background(Color.green.opacity(0.2))
-                            .foregroundColor(.green)
-                            .cornerRadius(4)
                     }
                 }
             }
@@ -127,37 +123,21 @@ struct CurrencyConverterView: View {
             .padding(.horizontal)
             
             Spacer()
-            
-            // Convert Button
-            Button(action: {
-                viewModel.convert()
-            }) {
-                if viewModel.isLoading {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                        .frame(maxWidth: .infinity)
-                } else {
-                    Text("Convert Now")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                }
+    
+            if viewModel.isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .padding()
             }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(12)
-            .padding(.horizontal)
-            .padding(.bottom)
-            .disabled(viewModel.isLoading)
         }
         .background(Color(.systemGroupedBackground).edgesIgnoringSafeArea(.all))
         .sheet(isPresented: $showFromCurrencyPicker) {
             CurrencySelectionView(selectedCurrency: $viewModel.fromCurrency, 
-                                excludedCurrency: viewModel.toCurrency)
+                              excludedCurrency: viewModel.toCurrency)
         }
         .sheet(isPresented: $showToCurrencyPicker) {
             CurrencySelectionView(selectedCurrency: $viewModel.toCurrency,
-                                excludedCurrency: viewModel.fromCurrency)
+                              excludedCurrency: viewModel.fromCurrency)
         }
         .alert("Error", isPresented: .constant(viewModel.errorMessage != nil), actions: {
             Button("OK", role: .cancel) {}
@@ -168,5 +148,3 @@ struct CurrencyConverterView: View {
         })
     }
 }
-
-
