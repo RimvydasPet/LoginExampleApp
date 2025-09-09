@@ -73,8 +73,8 @@ final class LoginExampleAppUITestsLaunchTests: XCTestCase {
         XCTAssertNotEqual(passwordField.value as? String, nil, "Password field should be present")
         
         // Verify placeholders are set correctly
-        XCTAssertEqual(usernameField.placeholderValue, "Username", "Username field should have correct placeholder")
-        XCTAssertEqual(passwordField.placeholderValue, "Password", "Password field should have correct placeholder")
+        XCTAssertEqual(usernameField.placeholderValue, "Enter your username", "Username field should have correct placeholder")
+        XCTAssertEqual(passwordField.placeholderValue, "Enter your password", "Password field should have correct placeholder")
         
         // Capture screenshot of the initial state
         let screenshot = app.screenshot()

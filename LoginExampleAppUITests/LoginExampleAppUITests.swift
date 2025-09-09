@@ -96,7 +96,7 @@ final class LoginExampleAppUITests: XCTestCase {
         registerButton.tap()
         
         // Then
-        let registerTitle = app.staticTexts["Register"]
+        let registerTitle = app.staticTexts["Create Account"]
         XCTAssertTrue(registerTitle.waitForExistence(timeout: 1), "Should navigate to register screen")
     }
     
@@ -105,7 +105,7 @@ final class LoginExampleAppUITests: XCTestCase {
         testSuccessfulLogin()
         
         // When
-        logoutButton.tap()
+        app.navigationBars.buttons["Logout"].tap()
         
         // Confirm logout alert
         let alert = app.alerts["Log Out"]
@@ -120,17 +120,30 @@ final class LoginExampleAppUITests: XCTestCase {
     func testPerformanceLogin() {
         // This measures the time it takes to perform a successful login
         measure(metrics: [XCTCPUMetric(), XCTMemoryMetric()]) {
+            // Clear any existing data before starting
+            app.terminate()
+            app.launch()
+            
+            // Perform login
             login(username: "testuser", password: "password123")
             
-            // Wait for login to complete
+            // Wait for login to complete with a more specific check
             let welcomeTextPredicate = NSPredicate(format: "label CONTAINS 'Welcome'")
-            _ = app.staticTexts.element(matching: welcomeTextPredicate).waitForExistence(timeout: 5)
+            let welcomeText = app.staticTexts.element(matching: welcomeTextPredicate)
+            XCTAssertTrue(welcomeText.waitForExistence(timeout: 5), "Welcome text should be visible after login")
             
-            // Logout to reset state
-            if logoutButton.waitForExistence(timeout: 1) {
-                logoutButton.tap()
-                app.alerts.buttons["Log Out"].tap()
-            }
+            // Clean up after each measurement
+            app.terminate()
         }
+        
+        // Additional memory cleanup after all measurements
+        app.terminate()
+        
+        // Give the system time to clean up
+        let expectation = XCTestExpectation(description: "Wait for cleanup")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 2.0)
     }
 }

@@ -118,3 +118,4 @@ struct CurrencyConverterView: View {
         })
     }
 }
+

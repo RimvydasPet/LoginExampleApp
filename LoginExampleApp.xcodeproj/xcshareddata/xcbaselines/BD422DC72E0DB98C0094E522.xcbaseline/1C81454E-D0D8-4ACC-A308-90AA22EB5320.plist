@@ -18,7 +18,7 @@
 				<key>com.apple.dt.XCTMetric_Memory.physical</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>188.000000</real>
+					<real>269.000000</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>
@@ -38,7 +38,7 @@
 				<key>com.apple.dt.XCTMetric_Memory.physical</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>61.400000</real>
+					<real>39.600000</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>
@@ -65,7 +65,7 @@
 				<key>com.apple.dt.XCTMetric_ApplicationLaunch-AppLaunch.duration</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>3.280000</real>
+					<real>3.500000</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
 				</dict>
