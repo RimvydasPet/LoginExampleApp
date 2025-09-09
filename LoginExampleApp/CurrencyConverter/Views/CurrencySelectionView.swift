@@ -31,7 +31,6 @@ struct CurrencySelectionView: View {
                         HStack {
                             Text(currency.flag)
                                 .font(.title2)
-                            
                             VStack(alignment: .leading) {
                                 Text(currency.code)
                                     .font(.headline)
@@ -39,9 +38,7 @@ struct CurrencySelectionView: View {
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                             }
-                            
                             Spacer()
-                            
                             if currency.code == selectedCurrency.code {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.blue)
@@ -66,7 +63,6 @@ struct CurrencySelectionView: View {
     }
 }
 
-// MARK: - Search Bar Component
 struct SearchBar: View {
     @Binding var text: String
     var placeholder: String
@@ -76,10 +72,8 @@ struct SearchBar: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.gray)
-                
                 TextField(placeholder, text: $text)
                     .textFieldStyle(PlainTextFieldStyle())
-                
                 if !text.isEmpty {
                     Button(action: {
                         text = ""

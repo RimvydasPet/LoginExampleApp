@@ -1,10 +1,9 @@
 import Foundation
+import SwiftData
 
 protocol LoginBusinessLogic {
     func login(request: Login.Request)
 }
-
-import SwiftData
 
 final class LoginInteractor: LoginBusinessLogic {
     var presenter: LoginPresentationLogic?

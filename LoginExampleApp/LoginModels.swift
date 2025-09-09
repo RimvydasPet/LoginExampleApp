@@ -1,7 +1,5 @@
 import Foundation
 
-// MARK: - Login Models
-
 enum Login {
     // Request sent from ViewController to Interactor
     struct Request {

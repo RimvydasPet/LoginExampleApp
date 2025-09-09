@@ -40,10 +40,6 @@ class APIService: APIServiceProtocol {
         return URLSession.shared.dataTaskPublisher(for: request)
             .mapError { APIError.requestFailed($0) }
             .tryMap { data, response -> Data in
-                // Print raw response for debugging
-                if let jsonString = String(data: data, encoding: .utf8) {
-                    print("API Response: \(jsonString)")
-                }
                 
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {

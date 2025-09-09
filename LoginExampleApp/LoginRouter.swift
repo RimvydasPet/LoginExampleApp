@@ -9,8 +9,5 @@ final class LoginRouter: LoginRoutingLogic {
     weak var viewController: UIViewController?
     
     func routeToHome() {
-        // Example:
-        // let homeVC = HomeViewController()
-        // viewController?.navigationController?.pushViewController(homeVC, animated: true)
     }
 }
