@@ -14,11 +14,6 @@ struct CurrencyConverterView: View {
                     .foregroundColor(.gray)
                 
                 HStack {
-                    // Amount Input
-                    TextField("0.00", text: $viewModel.fromAmount)
-                        .keyboardType(.decimalPad)
-                        .font(.largeTitle)
-                
                     // Currency Selection Button
                     Button(action: {
                         showFromCurrencyPicker = true
@@ -36,6 +31,14 @@ struct CurrencyConverterView: View {
                         .cornerRadius(8)
                     }
                     .buttonStyle(PlainButtonStyle())
+                    
+                    Spacer()
+                    
+                    // Amount Input
+                    TextField("0.00", text: $viewModel.fromAmount)
+                        .keyboardType(.decimalPad)
+                        .font(.largeTitle)
+                        .multilineTextAlignment(.trailing)
                 }
                 
                 Divider()
@@ -78,13 +81,6 @@ struct CurrencyConverterView: View {
                     .foregroundColor(.gray)
                 
                 HStack {
-                    // Converted Amount
-                    Text(viewModel.toAmount.isEmpty ? "0.00" : viewModel.toAmount)
-                        .font(.largeTitle)
-                        .foregroundColor(viewModel.toAmount.isEmpty ? .gray : .primary)
-                    
-                    Spacer()
-                    
                     // Currency Selection Button
                     Button(action: {
                         showToCurrencyPicker = true
@@ -102,6 +98,14 @@ struct CurrencyConverterView: View {
                         .cornerRadius(8)
                     }
                     .buttonStyle(PlainButtonStyle())
+                    
+                    Spacer()
+                    
+                    // Converted Amount
+                    Text(viewModel.toAmount.isEmpty ? "0.00" : viewModel.toAmount)
+                        .font(.largeTitle)
+                        .foregroundColor(viewModel.toAmount.isEmpty ? .gray : .primary)
+                        .multilineTextAlignment(.trailing)
                 }
                 
                 Divider()
