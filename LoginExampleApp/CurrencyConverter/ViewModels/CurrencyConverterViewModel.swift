@@ -114,6 +114,8 @@ class CurrencyConverterViewModel: ObservableObject {
             errorMessage = "Invalid response from server"
         case .requestFailed:
             errorMessage = "No network  \nCheck your internet connection"
+        case .networkError(let description):
+            errorMessage = "Network error: \(description)"
         case .invalidData:
             errorMessage = "Invalid data received"
         case .decodingError:
