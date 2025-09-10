@@ -1,5 +1,31 @@
 import SwiftUI
 
+extension Color {
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (1, 1, 1, 0)
+        }
+        self.init(
+            .sRGB,
+            red: Double(r) / 255,
+            green: Double(g) / 255,
+            blue:  Double(b) / 255,
+            opacity: Double(a) / 255
+        )
+    }
+}
+
 struct CurrencyConverterView: View {
     @StateObject private var viewModel = CurrencyConverterViewModel()
     @State private var showFromCurrencyPicker = false
@@ -7,39 +33,70 @@ struct CurrencyConverterView: View {
     
     var body: some View {
         VStack(spacing: 20) {
+            Spacer()
+                .frame(height: 44)
             VStack(alignment: .leading, spacing: 8) {
-                Text("Sending from")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                HStack {
+                HStack(spacing: 12) {
+                    Spacer()
+                        .frame(width: 6, height: 0) // Match flag width
+                    
+                    Text("Sending from")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(white: 0.6))
+                    
+                    Spacer()
+                }
+                
+                HStack(spacing: 12) {
+                    // Flag
+                    Image(viewModel.fromCurrency.flagName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32, height: 32)
+                    
+                    // Currency selection button
                     Button(action: {
-                        showFromCurrencyPicker = true
-                    }) {
-                        HStack {
-                            Text(viewModel.fromCurrency.code)
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                            Image(systemName: "chevron.down")
-                                .font(.caption)
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            showFromCurrencyPicker = true
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .background(Color.blue.opacity(0.1))
+                    }) {
+                        HStack(spacing: 8) {
+                            Text(viewModel.fromCurrency.code)
+                                .font(.custom("Inter-Bold", size: 14))
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+                        .frame(width: 92, height: 32)
+                        .background(Color(hex: "#EDF0F4"))
                         .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color(hex: "#EDF0F4"), lineWidth: 1)
+                        )
                     }
                     .buttonStyle(PlainButtonStyle())
+                    
                     Spacer()
+                    
                     TextField("0.00", text: $viewModel.fromAmount)
                         .keyboardType(.decimalPad)
                         .font(.largeTitle)
                         .multilineTextAlignment(.trailing)
+                        .fixedSize(horizontal: true, vertical: false)
                 }
+                .padding(.horizontal)
             }
-            .padding()
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity)
             .background(Color(.systemBackground))
             .cornerRadius(12)
             .shadow(radius: 2)
             .padding(.horizontal)
+            .animation(.easeOut(duration: 0.3), value: viewModel.fromAmount)
+            
             HStack(spacing: 16) {
                 Button(action: {
                     viewModel.swapCurrencies()
@@ -61,38 +118,67 @@ struct CurrencyConverterView: View {
             }
             .padding(.vertical, 8)
             VStack(alignment: .leading, spacing: 8) {
-                Text("Receiver gets")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                HStack {
+                HStack(spacing: 12) {
+                    Spacer()
+                        .frame(width: 6, height: 0) // Match flag width
+                    
+                    Text("Receiver gets")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(white: 0.6))
+                    
+                    Spacer()
+                }
+                
+                HStack(spacing: 12) {
+                    // Flag
+                    Image(viewModel.toCurrency.flagName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32, height: 32)
+                    
+                    // Currency selection button
                     Button(action: {
-                        showToCurrencyPicker = true
-                    }) {
-                        HStack {
-                            Text(viewModel.toCurrency.code)
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                            Image(systemName: "chevron.down")
-                                .font(.caption)
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            showToCurrencyPicker = true
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .background(Color.green.opacity(0.1))
+                    }) {
+                        HStack(spacing: 8) {
+                            Text(viewModel.toCurrency.code)
+                                .font(.custom("Inter-Bold", size: 14))
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+                        .frame(width: 92, height: 32)
+                        .background(Color(hex: "#EDF0F4"))
                         .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color(hex: "#EDF0F4"), lineWidth: 1)
+                        )
                     }
                     .buttonStyle(PlainButtonStyle())
+                    
                     Spacer()
+                    
                     Text(viewModel.toAmount.isEmpty ? "0.00" : viewModel.toAmount)
                         .font(.largeTitle)
                         .foregroundColor(viewModel.toAmount.isEmpty ? .gray : .primary)
                         .multilineTextAlignment(.trailing)
+                        .fixedSize(horizontal: true, vertical: false)
                 }
+                .padding(.horizontal)
             }
-            .padding()
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity)
             .background(Color(.systemBackground))
             .cornerRadius(12)
             .shadow(radius: 2)
             .padding(.horizontal)
+            .animation(.easeOut(duration: 0.3), value: viewModel.toAmount)
+            
             Spacer()
             if viewModel.isLoading {
                 ProgressView()
@@ -109,13 +195,14 @@ struct CurrencyConverterView: View {
             CurrencySelectionView(selectedCurrency: $viewModel.toCurrency,
                                   excludedCurrency: viewModel.fromCurrency)
         }
-        .alert("", isPresented: .constant(viewModel.errorMessage != nil), actions: {
-            Button("OK", role: .cancel) {}
-        }, message: {
+        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
+            Button("OK", role: .cancel) {
+                viewModel.errorMessage = nil
+            }
+        } message: {
             if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
             }
-        })
+        }
     }
 }
-

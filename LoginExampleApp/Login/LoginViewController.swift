@@ -1,9 +1,5 @@
 import UIKit
 
-protocol LoginDisplayLogic: AnyObject {
-    func displayLogin(viewModel: Login.ViewModel)
-}
-
 final class LoginViewController: UIViewController, LoginDisplayLogic {
     var interactor: LoginBusinessLogic?
     var router: LoginRoutingLogic?

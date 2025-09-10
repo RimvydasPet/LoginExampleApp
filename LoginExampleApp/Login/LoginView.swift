@@ -12,7 +12,7 @@ struct LoginView: View {
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
-
+    
     var body: some View {
         ZStack {
             gradient

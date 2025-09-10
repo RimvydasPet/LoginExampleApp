@@ -8,7 +8,7 @@ protocol LoginBusinessLogic {
 final class LoginInteractor: LoginBusinessLogic {
     var presenter: LoginPresentationLogic?
     var modelContext: ModelContext?
-
+    
     func login(request: Login.Request) {
         guard let modelContext else {
             presenter?.presentLogin(response: Login.Response(success: false, errorMessage: "Internal error"))

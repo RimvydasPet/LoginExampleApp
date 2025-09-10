@@ -29,8 +29,11 @@ struct CurrencySelectionView: View {
                         dismiss()
                     }) {
                         HStack {
-                            Text(currency.flag)
-                                .font(.title2)
+                            Image(currency.flagName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 40)
+                                .clipShape(RoundedRectangle(cornerRadius: 4))
                             VStack(alignment: .leading) {
                                 Text(currency.code)
                                     .font(.headline)

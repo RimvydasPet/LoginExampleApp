@@ -4,15 +4,15 @@ struct Currency: Identifiable, Hashable {
     let id = UUID()
     let code: String
     let name: String
-    let flag: String
+    let flagName: String
     let maxAmount: Float
     
     // Predefined list of supported currencies with their max limits
     static let supportedCurrencies: [Currency] = [
-        Currency(code: "PLN", name: "Polish Złoty", flag: "🇵🇱", maxAmount: 20000),
-        Currency(code: "EUR", name: "Euro", flag: "🇪🇺", maxAmount: 5000),
-        Currency(code: "GBP", name: "British Pound", flag: "🇬🇧", maxAmount: 1000),
-        Currency(code: "UAH", name: "Ukrainian Hryvnia", flag: "🇺🇦", maxAmount: 50000)
+        Currency(code: "PLN", name: "Polish Złoty", flagName: "Icon PL", maxAmount: 20000),
+        Currency(code: "EUR", name: "Euro", flagName: "Icon DE", maxAmount: 5000),
+        Currency(code: "GBP", name: "British Pound", flagName: "Icon UK", maxAmount: 1000),
+        Currency(code: "UAH", name: "Ukrainian Hryvnia", flagName: "Icon UA", maxAmount: 50000)
     ]
     
     static var defaultFromCurrency: Currency {

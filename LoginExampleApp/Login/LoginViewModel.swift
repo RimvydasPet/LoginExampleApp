@@ -8,7 +8,7 @@ class LoginViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var errorMessage: String? = nil
     @Published var isLoggedIn: Bool = false
-
+    
     private var interactor: LoginBusinessLogic
     
     var modelContext: ModelContext? {
@@ -18,7 +18,7 @@ class LoginViewModel: ObservableObject {
             }
         }
     }
-
+    
     init() {
         let interactor = LoginInteractor()
         let presenter = LoginPresenter()
@@ -31,7 +31,7 @@ class LoginViewModel: ObservableObject {
             }
         }
     }
-
+    
     func login() {
         let request = Login.Request(username: username, password: password)
         interactor.login(request: request)
